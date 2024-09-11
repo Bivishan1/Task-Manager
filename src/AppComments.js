@@ -8,19 +8,22 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setnewTask] = useState('');
 
-  const handleAddTask = (e) => {
-    e.preventDefault();
+  const handleAddTask = () => {
+    //validatioon
     if (newTask.trim() === "") return alert('please add something');
-
+    // The current array of tasks (tasks) is spread into a new array, and the new task (as an object with name and completed properties) is added to the end.
     setTasks([...tasks, { name: newTask, completed: false }]);
+    console.log(tasks);
+    // resetting the newTask state to an empty string that makes text field an empty.
     setnewTask("");
   }
 
   const handleToggleComplete = (index) => {
     const updatedTasks = tasks.map((task, i) => {
+      //checking whether current item is matching with current index or not
       return i === index ? { ...task, completed: !task.completed } : task
     });
-    setTasks(updatedTasks);
+    setTasks(updatedTasks);//returning newly toggled array tasks list with checking passing index along with matching list item i.e. i
   }
 
   const handleDeleteTask = (index) => {
