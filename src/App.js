@@ -3,47 +3,21 @@ import './App.css';
 import TaskInput from './components/TaskInput';
 import { useState } from 'react';
 import TaskList from './components/TaskList';
+import { TaskProvider } from './TaskContext';
 
 function App() {
-  const [tasks, setTasks] = useState([]);
-  const [newTask, setnewTask] = useState('');
-
-  const handleAddTask = (e) => {
-    e.preventDefault();
-    if (newTask.trim() === "") return alert('please add something');
-
-    setTasks([...tasks, { name: newTask, completed: false }]);
-    setnewTask("");
-  }
-
-  const handleToggleComplete = (index) => {
-    const updatedTasks = tasks.map((task, i) => {
-      return i === index ? { ...task, completed: !task.completed } : task
-    });
-    setTasks(updatedTasks);
-  }
-
-  const handleDeleteTask = (index) => {
-    const updatedTasks = tasks.filter((_, i) => {
-      return i !== index;
-    });
-
-    setTasks(updatedTasks);
-  }
-
+  //removing all logic here since they shifted to context and reducer logic.
+  // by wrapping with TaskProvider, now, taks input and task list have access to all the data from the task provider, which is a state and dispatch function to update the state.
 
   return (
-    <div className="App">
-      <h1>Task Manager</h1>
-      <TaskInput handleAddTask={handleAddTask}
-        newTask={newTask}
-        setnewTask={setnewTask}
-      />
-      <TaskList tasks={tasks}
-        handleToggleComplete={handleToggleComplete}
-        handleDeleteTask={handleDeleteTask}
-      />
-    </div>
+    <TaskProvider>
+      <div className="App">
+        <h1>Task Manager</h1>
+        <TaskInput />
+        <TaskList />
+      </div>
+    </TaskProvider>
+
   );
 }
 
