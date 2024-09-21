@@ -6,8 +6,8 @@ export const taskReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_TASK':
             return { //return an object that contain all the task and state
-                ...state,//storing all state tasks
-                tasks: [...state.tasks, { name: action.payload, completed: false }] //action has a two attribute one for .type to get the type and another is .payload which helps to get the text of new task. and completed flag is false initially.
+                ...state,//storing all state or current tasks
+                tasks: [...state.tasks, { name: action.payload, completed: false }] //action has a two attribute one for .type to get the type and another is .payload which helps to get the text of new task. and completed flag is false initially.//return all updated tasks with flag.
             }
         case 'TOGGLE_TASK':
             return {

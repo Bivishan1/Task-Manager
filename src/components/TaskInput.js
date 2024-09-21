@@ -9,13 +9,15 @@ function TaskInput() {
     const [newTask, setnewTask] = useState('');
     //update and adding new task , we use dispatch
     //dispatch function from the context, so we are just using destructuring object and using and retrieving only dispatch function.
+    //dispatch function used to perform  action in the state.
     const { dispatch } = useContext(TaskContext);
 
     //event handler to handle the event.
     const handleAddTask = (e) => {
         e.preventDefault();
         if (newTask.trim().length !== 0) {
-            dispatch({ type: 'ADD_TASK', payload: newTask });
+            dispatch({ type: 'ADD_TASK', payload: newTask });//payload received new text from the newTask state.
+            //passing action object inside dispatch function.
             setnewTask('');
         }
         else {
